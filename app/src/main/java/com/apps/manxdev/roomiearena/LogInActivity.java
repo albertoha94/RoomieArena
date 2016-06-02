@@ -1,7 +1,9 @@
 package com.apps.manxdev.roomiearena;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +25,7 @@ public class LogInActivity extends AppCompatActivity {
     EditText et_email, et_pass;
     RequestQueue requestQueue;
     String selectURL = "http://192.168.1.11/RoomieArena/loginCheck.php";
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +55,18 @@ public class LogInActivity extends AppCompatActivity {
                     new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(LogInActivity.this, response, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(LogInActivity.this, response, Toast.LENGTH_SHORT).show();
 
-                    if ( response.contains("true")){
+                    if ( response.contains("id")){
                         // Abrir Welcom Activity
+
+                        sp  = PreferenceManager
+                                .getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("id_roomie", response.substring(21, response.length() - 4));
+                        editor.commit();
+                        Toast.makeText(LogInActivity.this, sp.getString("id_roomie", "-1"), Toast.LENGTH_SHORT).show();
+
                         Welcome();
 
                     }
@@ -73,7 +84,7 @@ public class LogInActivity extends AppCompatActivity {
             }){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
-                    Map <String, String> parameters = new HashMap<String, String>();
+                    Map <String, String> parameters = new HashMap<>();
                     parameters.put("email",email);
                     parameters.put("pass", pass);
                     return parameters;

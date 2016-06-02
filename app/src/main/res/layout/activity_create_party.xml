@@ -39,7 +39,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText2"
+                android:id="@+id/pc_et_partyname"
                 android:layout_centerVertical="true"
                 android:layout_alignStart="@+id/li_et_pass"
                 android:layout_alignEnd="@+id/li_et_pass"
@@ -68,7 +68,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
+                android:id="@+id/pc_et_partymoto"
                 android:layout_centerVertical="true"
                 android:layout_alignStart="@+id/li_et_pass"
                 android:layout_alignEnd="@+id/li_et_pass"
@@ -88,7 +88,8 @@
                 android:text="New Button"
                 android:id="@+id/button"
                 android:padding="0dp"
-                android:layout_gravity="bottom" />
+                android:layout_gravity="bottom"
+                android:onClick="MakeParty" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
